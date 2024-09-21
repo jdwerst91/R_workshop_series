@@ -1,0 +1,704 @@
+---
+title: "Data Visualization with GGPlot"
+author: "Matt Steele"
+format: revealjs
+editor: visual
+---
+
+## Resources
+
+-   [Tidyverse Documentation](https://www.tidyverse.org/)
+
+-   [O'Reilly Learning
+    Platform](https://databases.lib.wvu.edu/connect/1540334373)
+
+    -   R for Data Science, 2nd Edition
+
+    -   R Programming for Statistics and Data Science
+
+## Recap
+
+-   Functions and Arguments
+-   Objects
+-   Run Code
+
+::: notes
+a "line of code" typically refers to a single statement or instruction
+written in the R script or console, which can be executed independently
+and performs a specific task or operation
+:::
+
+## Working Directory
+
+The working directory in R is the folder where you are working. Hence,
+it's the place (the environment) where you have to store your files of
+your project in order to load them or where your R objects will be
+saved.
+
+> *Session \> Set Working Directory \> Choose Directory*
+
+<br>
+
+```{r}
+#| label: setwd
+#| echo: true
+#| eval: false
+
+
+getwd() # show current directory that you are in
+
+
+setwd("path/to/your/directory") # sets the working directory
+
+
+```
+
+## GGPlot
+
+visualize your data with ggplot
+
+-   [ggplot package](%22https://ggplot2.tidyverse.org/%22)
+
+<br />
+
+```{r}
+#| label: load tidyverse
+#| eval: false
+#| echo: true
+
+library(tidyverse)
+```
+
+## Grammar of Graphics
+
+the grammar of graphics is implemented through a layered approach to
+building plots.
+
+### Required
+
+1.  Data: The raw data that you want to visualize.
+2.  Aesthetic Mapping (aes()): Defines how variables in the data map to
+    visual properties like position, color, size, shape, etc.
+3.  Geometric Objects (geom\_\*): Represent the actual geometric shapes
+    on the plot (e.g., points, lines, bars).
+
+## Grammar of Graphics
+
+the grammar of graphics is implemented through a layered approach to
+building plots.
+
+### Optional
+
+4.  Coordinate System (coord\_\*):Defines the coordinate system for the
+    plot (e.g., Cartesian, polar).
+5.  Faceting (facet\_\*): Divides the plot into subplots based on one or
+    more categorical variables.
+6.  Themes (theme\_\*): Customize the appearance of the plot, including
+    titles, labels, and overall aesthetics.
+
+## Line graph
+
+lets create a line graph that tracks approval ratings for the Supreme
+Court of the United States over time.
+
+::: footer
+Data from 538 Latest Polls -
+<https://projects.fivethirtyeight.com/polls/approval/joe-biden/?ex_cid=abcpromo>
+:::
+
+## Data
+
+start by loading the data set we are going to work on
+
+<br />
+
+```{r}
+#| label: load scotus data
+#| eval: false
+#| echo: true
+
+scotus <- read_csv("scotus_approval.csv")
+
+scotus
+
+
+# let's just view the pollster YouGov using the filter function
+
+scotus_yg <- scotus |> 
+  filter(pollster == "YouGov")
+
+scotus_yg
+
+```
+
+## Aesthetic Mapping (aes())
+
+next we are going to set the variables that will use by using the
+[ggplot function](https://ggplot2.tidyverse.org/reference/ggplot.html)
+along with the [aes
+function](https://ggplot2.tidyverse.org/reference/aes.html)
+
+<br />
+
+```{r}
+#| label: set aes
+#| eval: false
+#| echo: true
+
+scotus.line <- ggplot(scotus_yg, aes(date, per_yes))
+
+
+```
+
+## Geometric Objects (geom\_\*)
+
+finally we are going to choose the plot that we want to use for our
+visualization using the [geom\_\*
+element](https://ggplot2.tidyverse.org/reference/index.html#geoms)
+
+-   [Geom
+    Cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf)
+
+<br />
+
+```{r}
+#| label: geom
+#| eval: false
+#| echo: true
+
+scotus.line + 
+  geom_line()
+
+```
+
+<br />
+
+-   in ggplot we combine elements of our plot using **+**
+
+::: notes
+in this instance we are combining the element with our data and
+variables (scotus.line) with the geom we have chosen (geom_line)
+:::
+
+## Theme: Color, Geom Size, Transparancy
+
+|                           |                          |
+|---------------------------|--------------------------|
+| **fill =** or **color =** | change geom color        |
+| **size =**                | change geom size         |
+| **alpha =**               | change geom transparency |
+
+<br />
+
+```{r}
+#| label: color, shape, transparency
+#| eval: false
+#| echo: true
+
+# add color
+
+scotus.line + 
+  geom_line(color = "coral")
+
+# change the size
+
+scotus.line + 
+  geom_line(color = "coral", size = 2)
+
+
+```
+
+## Theme: Labels
+
+the [labs
+element](https://ggplot2.tidyverse.org/reference/labs.html?q=labs) will
+allow you to add or change labels in the plot
+
+<br />
+
+```{r}
+#| label: labs
+#| eval: false
+#| echo: true
+
+scotus.line + 
+  geom_line(color = "coral", size = 2) +
+  labs(
+    title = "SCOTUS Approval",
+    subtitle = "2023",
+    caption = "polls from YouGov",
+    y = "Approval",
+    x = NULL
+  )
+
+```
+
+## Themes: Built-in
+
+ggplot has [built-in
+themes](https://ggplot2.tidyverse.org/reference/index.html#themes) with
+pre-set settings for you
+
+<br />
+
+```{r}
+#| label: built-in theme
+#| eval: false
+#| echo: true
+
+scotus.line + 
+  geom_line(color = "coral", size = 2) +
+  labs(
+    title = "SCOTUS Approval",
+    subtitle = "2023",
+    caption = "polls from YouGov",
+    y = "Approval",
+    x = NULL
+  ) +
+  theme_minimal()
+
+```
+
+## Themes: Customize
+
+the [theme element](https://ggplot2.tidyverse.org/reference/theme.html)
+will allow you to customize the appearance of axes, legends, and labels
+
+<br />
+
+```{r}
+#| label: customize theme
+#| eval: false
+#| echo: true
+
+scotus.line + 
+  geom_line(color = "coral", size = 2) +
+  labs(
+    title = "SCOTUS Approval",
+    subtitle = "2023",
+    caption = "polls from YouGov",
+    y = "Approval",
+    x = NULL
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 20, color = "navy"))
+
+```
+
+## Theme: Scales
+
+::: r-fit-text
+the [scales
+element](https://ggplot2.tidyverse.org/reference/index.html#scales)
+allows you to fine-tune and adjust the mapping/scale of labels, breaks,
+and legends
+
+-   the **scale_x_date** element allows you to adjust your date elements
+    on the x axis
+
+-   [Date Formats - strptime](https://rdrr.io/r/base/strptime.html)
+
+<br />
+
+```{r}
+#| label: scales
+#| eval: false
+#| echo: true
+
+scotus.line + 
+  geom_line(color = "coral", size = 2) +
+  labs(
+    title = "SCOTUS Approval",
+    subtitle = "2023",
+    caption = "polls from YouGov",
+    y = "Approval",
+    x = NULL
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 20, color = "navy")) +
+  scale_x_date( date_breaks = "6 weeks",
+                date_labels = "%b %d")
+  
+```
+:::
+
+## Smoothed Lines
+
+You can reduce overplotting using **loess** or **linear regression
+lines** with the [geom_smooth or stat_smooth
+element](https://ggplot2.tidyverse.org/reference/geom_smooth.html)
+
+<br />
+
+```{r}
+#| label: geom_smooth
+#| eval: false
+#| echo: true
+
+scotus.line + 
+  geom_smooth(color = "coral", size = 2) +
+  labs(
+    title = "SCOTUS Approval",
+    subtitle = "2023",
+    caption = "polls from YouGov",
+    y = "Approval",
+    x = NULL
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 20, color = "coral")) +
+  scale_x_date( date_breaks = "6 weeks",
+                date_labels = "%b %d")
+
+```
+
+## Export your plot
+
+The [ggsave
+function](https://ggplot2.tidyverse.org/reference/ggsave.html) will
+export the most recent plot called in a file type specified by the user
+
+-   Additionally you can use the export options in RStudio's Plot tab in
+    the Misc Pane
+
+```{r}
+#| label: export
+#| eval: false
+#| echo: true
+
+ggsave("scotus_approval.png", width = 6, height = 4, dpi = 300)
+
+```
+
+## Histogram Graph
+
+the [histogram
+geom](https://ggplot2.tidyverse.org/reference/geom_histogram.html)
+allows you to see the distribution of a continuous (dbl or num) variable
+
+-   set data, aesthetics, and geom
+
+<br />
+
+```{r}
+#| label: histogram
+#| eval: false
+#| echo: true
+
+# load demographics data frame
+
+demo <- read_csv("demographics.csv")
+
+# let's look at the distribution of the age variable by creating a histogram
+
+demo.hist <- ggplot(demo, aes(age))
+
+demo.hist +
+  geom_histogram()
+
+```
+
+## Binning
+
+the binning argument allows you to group continuous data into discrete
+intervals or bins
+
+<br />
+
+```{r}
+#| label: bin
+#| eval: false
+#| echo: true
+
+# number of bins to use
+
+demo.hist +
+  geom_histogram(bins = 10)
+
+# length of a bins
+
+demo.hist +
+  geom_histogram(binwidth = 15)
+
+```
+
+## Theme: Color, Geom Size, Transparancy
+
+|                           |                          |
+|---------------------------|--------------------------|
+| **fill =** or **color =** | change geom color        |
+| **size =**                | change geom size         |
+| **alpha =**               | change geom transparency |
+
+<br />
+
+```{r}
+#| label: theme options
+#| eval: false
+#| echo: true
+
+demo.hist +
+  geom_histogram(bins = 25, 
+                 color = "coral", 
+                 fill = "skyblue", 
+                 alpha = .5) +
+  theme_light()
+
+```
+
+## Order of Elements
+
+The order that the elements appear on the plot is dictated by its
+position in your code.
+
+-   The first elements in the code appear at the bottom of the plot and
+    the last elements appear on the top of you plot
+
+## Mutliple Geoms
+
+We can add multiple geoms into a plot by adding theme as their own
+element
+
+-   Example: the [geom_vline/geom_hline
+    element](https://ggplot2.tidyverse.org/reference/geom_abline.html)
+    allows you to add a reference line to your plot
+
+<br />
+
+```{r}
+#| label: vline
+#| eval: false
+#| echo: true
+
+# add a reference line
+
+demo.hist +
+  geom_vline(xintercept = 40, color = "navy", size = 3) +
+  geom_histogram(bins = 25, color = "coral", fill = "skyblue", alpha = .5) +
+  theme_light()
+
+```
+
+## Faceting
+
+the
+[facet_grid](https://ggplot2.tidyverse.org/reference/facet_grid.html) or
+[facet_wrap](https://ggplot2.tidyverse.org/reference/facet_wrap.html)
+element will allow you to break your plot out by categorical variables
+
+<br />
+
+```{r}
+#| label: facets
+#| eval: false
+#| echo: true
+
+demo.hist +
+  geom_vline(xintercept = 40, color = "navy", size = 3) +
+  geom_histogram(bins = 25, color = "coral", fill = "skyblue", alpha = .5) +
+  theme_light() + 
+  facet_wrap(facets = vars(inccat), nrow = 3)
+
+```
+
+## Bar Graph
+
+the [geom_bar
+element](https://ggplot2.tidyverse.org/reference/geom_bar.html?q=geom_bar)
+allows you create a bar chart uses the number of cases of each group in
+a categorical variable
+
+<br />
+
+```{r}
+#| label: geom_bar
+#| eval: false
+#| echo: true
+
+
+demo.bar <- ggplot(demo, aes(carcat))
+
+demo.bar +
+  geom_bar()
+
+
+```
+
+## Bar Graph
+
+the [geom_col
+element](https://ggplot2.tidyverse.org/reference/geom_bar.html?q=geom_bar)
+allows you to create a bar chart using a categorical and continuous
+variable
+
+<br />
+
+```{r}
+#| label: geom_col
+#| eval: false
+#| echo: true
+
+demo.col <- ggplot(demo, aes(carcat, income))
+
+demo.col +
+  geom_col()
+
+```
+
+## Reorder Plot
+
+you can order the bar graph using the [fct_reorder
+function](https://forcats.tidyverse.org/reference/fct_reorder.html) from
+Forcats
+
+<br />
+
+```{r}
+#| label: fct_reorder
+#| eval: false
+#| echo: true
+
+
+demo.col <- ggplot(demo, aes(fct_reorder(carcat, income), income))
+
+demo.col +
+  geom_col()
+
+```
+
+## Add Additional Variable
+
+you can use the fill argument in aes to map an additional variable onto
+individual bars
+
+<br />
+
+```{r}
+#| label: aes fill
+#| eval: false
+#| echo: true
+
+demo.col +
+  geom_col(aes(fill = ed))
+
+```
+
+## Theme: Scale Color Palette
+
+The scale_fill_brewer function will allow you to add pre-built palettes
+to your plot
+
+-   [Color
+    Brewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)
+
+```{r}
+#| label: color brewer
+#| eval: false
+#| echo: true
+
+demo.col +
+  geom_col(aes(fill = ed)) +
+  scale_fill_brewer(palette = "Pastel1")
+
+```
+
+## Theme: Scale Numeric Axis
+
+the [scales
+element](https://ggplot2.tidyverse.org/reference/index.html#scales)
+allows you to fine-tune and adjust the mapping/scale of labels, breaks,
+and legends
+
+-   the **scale_y_continuous** or **scale_x_continuous** along with
+    [label_number](https://scales.r-lib.org/reference/label_number.html)
+    elements allows you to adjust a numeric axis
+
+<br />
+
+```{r}
+#| label: scale continous
+#| eval: false
+#| echo: true
+
+demo.col +
+  geom_col(aes(fill = ed)) +
+  scale_fill_brewer(palette = "Pastel1") +
+  scale_y_continuous(labels = scales::label_number_si())
+  
+
+```
+
+# RMarkdown
+
+RMarkdown is a user-friendly markup language that combines text, code,
+and output in a single document, making it easy to create dynamic
+reports and documents with integrated data analysis using R.
+
+-   [RMarkdown Gallery](https://rmarkdown.rstudio.com/gallery.html)
+-   [Quarto Gallery](https://quarto.org/docs/gallery/)
+
+## Why Create a Markdown Document
+
+-   reproducibility
+-   collaboration
+-   seamless integration of code and narrative.
+-   HTML, PDF, or Word Export
+
+## Structure: YAML Front Matter
+
+The YAML (YAML Ain't Markup Language) front matter is an optional
+section at the beginning of the document, enclosed by three dashes
+(---).
+
+-   It is used to set document metadata and configuration options.
+-   Common YAML parameters include *title*, *author*, *date*, and
+    *output format*.
+
+## Structure: YAML Front Matter
+
+
+```{r}
+#| label: YAML
+#| eval: false
+#| echo: true
+
+---
+
+title: "A Pandoc Markdown Article Starter and Template"
+thanks: "Replication files are available on the author's Github account (http://github.com/svmiller). **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: svmille@clemson.edu."
+author:
+  name: Steven V. Miller
+  affiliation: Clemson University
+  abstract: "This document provides an introduction to R Markdown, argues for its benefits, and presents a sample manuscript template intended for an academic audience. I include basic syntax to R Markdown and a minimal working example of how the analysis itself can be conducted within R with the `knitr` package."
+  keywords: "pandoc, r markdown, knitr"
+date: "November 13, 2023"
+output: html_document
+
+---
+
+```
+
+
+## Structure: YAML Front Matter
+
+
+![](svm-rmarkdown-article-example.png){style="border: 1px solid #f0f0f0;"}
+
+## Text (Markdown) Chunks
+
+The main body of the document consists of text written in Markdown, a lightweight markup language.
+Markdown allows you to format text using simple syntax, including headers, lists, emphasis, and more.
+
+## Code Chunks 
+
+- Code chunks allow you to integrate executable code into your document.
+- Code chunks start and end with three backticks (```). You can specify the language (e.g., r for R) after the opening backticks.
+- R code within code chunks is executed when the document is rendered.
+
+## Render Options
+
+- Include: allows you to include or not include the chunk code in the final product when rendered.
+- Eval: run or not run a code chunk when the document is rendered
+- Echo: show the code chunk when the document is rendered
+- Message: include messages when the document is rendered
+
+

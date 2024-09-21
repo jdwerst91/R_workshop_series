@@ -1,0 +1,645 @@
+---
+title: "Data Cleaning with R and Tidyverse"
+author: "Matt Steele"
+format: revealjs
+editor: visual
+---
+
+## Resources
+
+-   [Tidyverse Documentation](https://www.tidyverse.org/)
+
+-   [O'Reilly Learning Platform](https://databases.lib.wvu.edu/connect/1540334373)
+
+    -   R for Data Science, 2nd Edition
+
+    -   R Programming for Statistics and Data Science
+
+## Recap
+
+-   Functions and Arguments
+-   Objects
+-   Run Code
+
+::: notes
+a "line of code" typically refers to a single statement or instruction written in the R script or console, which can be executed independently and performs a specific task or operation
+:::
+
+## Working Directory
+
+The working directory in R is the folder where you are working. Hence, it's the place (the environment) where you have to store your files of your project in order to load them or where your R objects will be saved.
+
+> *Session \> Set Working Directory \> Choose Directory*
+
+<br>
+
+```{r}
+#| label: setwd
+#| echo: true
+#| eval: false
+
+
+getwd() # show current directory that you are in
+
+
+setwd("path/to/your/directory") # sets the working directory
+
+
+```
+
+## Packages
+
+R packages are like toolkits or collections of pre-built functions, data sets, and tools that extend the capabilities of the R programming language.
+
+::: notes
+Going back to the toolbox metaphor ... if you have a toolbox but you don't want to bring unnecessary tools to a job because it could be heavy and overwhelming. Instead, you can pick and choose the tools you need for a particular job.
+
+This is where R packages come in. Think of them as smaller, specialized toolkits within the big toolbox. Each package contains a set of tools (functions and features) that are designed for specific tasks or purposes.
+:::
+
+## Tidyverse
+
+[Tidyverse](https://www.tidyverse.org/) is a collection of packages focused on data analysis and data visualizations that share an underlying design philosophy, grammar, and data structures.
+
+<br />
+
+```{r}
+#| label: install tidyverse
+#| eval: false
+#| echo: true
+
+install.packages("tidyverse")
+
+```
+
+<br />
+
+```{r}
+#| label: load tidyverse
+#| eval: false
+#| echo: true
+
+library(tidyverse)
+
+```
+
+## Tidyverse
+
+::: r-fit-text
+|                                                     |                                                                   |
+|---------------------------|---------------------------------------------|
+| [tibble](https://tibble.tidyverse.org/)             | lighter and more user-friendly version of data frames             |
+| [tidyr](https://tidyr.tidyverse.org/)               | create tidy and meaningfully arranged data                        |
+| [readr](https://readr.tidyverse.org/)               | better importation of data into R                                 |
+| [ggplot](https://ggplot2.tidyverse.org/)            | data visualization functions                                      |
+| [dplyr](https://dplyr.tidyverse.org/)               | data manipulation tools                                           |
+| [lubridate](https://lubridate.tidyverse.org/)       | clean dates and times                                             |
+| [purr](https://purrr.tidyverse.org/)                | better functional programming                                     |
+| [forcats](https://forcats.tidyverse.org/index.html) | handle, clean, and manipulate categorical variables               |
+| [haven](https://haven.tidyverse.org/)               | read and write data formats from proprietary statistical packages |
+:::
+
+## Loading Data with Readr
+
+The **read_csv** function allows you to load data into R in a tibble data frame
+
+> read_csv("data_set.csv")
+
+<br />
+
+```{r}
+#| label: read_csv function
+#| eval: false
+#| echo: true
+
+sw_df <- read_csv("starwars.csv")
+
+```
+
+## Loading Proprietary Data
+
+- [readXl](https://readxl.tidyverse.org/) - this package allows you to read Excel files in a tibble data frame
+
+- [haven](https://haven.tidyverse.org/) - this package allows you to read and export non-proprietary files for SPSS, SAS, and STATA
+
+
+## The Pipe Operator (\|\>)
+
+The pipe operator (**\|\>** or **%\>%**) allows you to run commands or operation on a single object based on an order of operations
+
+<br />
+
+|               | PC               | MAC             |
+|---------------|------------------|-----------------|
+| Pipe Operator | CTRL + SHIFT + M | CMD + SHIFT + M |
+
+::: notes
+So, it's like taking a conveyor belt for data. You put your data on the conveyor belt, and it goes through different processing steps one by one. The pipe operator ensures that the data flows smoothly from one step to the next until you get the final result you want.
+:::
+
+## The Pipe Operator (\|\>)
+
+let's say you want to see the **name**, **height**, **mass**, and **species** of characters who were born on **Tatooine** and then relocate the **mass** variable
+
+<br />
+
+```{r}
+#| label: pipe operator example
+#| eval: false
+#| echo: true
+
+view(sw_df)
+
+sw_df |> # object we are working on
+  filter(homeworld == "Tatooine") |> # first operation
+  select(name, height, mass, species) |>  # second operation
+  relocate(mass, .before = name) # third operation
+
+```
+
+## Order of Operations
+
+With the pipe operator, your code becomes more organized and reads like a step-by-step process:
+
+1.  Take the data ...
+2.  Do this
+3.  Then do this...
+4.  And finally, do this.
+
+```{r}
+#| label: pipe operator fail
+#| eval: false
+#| echo: true
+
+# order of operations matter
+
+sw_df |> # object we are working on
+  select(name, height, mass, species) |> # first operation
+  filter(homeworld == "Tatooine") |>  # second operation
+  relocate(mass, .before = name) #third operation
+
+# why did this not work?
+
+```
+
+## Explore Data - Tidyverse
+
+**view** function: interactively explore the contents of a data frame in a separate viewer window or in the RStudio viewer pane.
+
+```{r}
+#| label: view function
+#| eval: false
+#| echo: true
+
+view(sw_df)
+
+```
+
+<br />
+
+**glimpse** function: a concise overview of the data, including variable types.
+
+```{r}
+#| label: glimpse function
+#| eval: false
+#| echo: true
+
+glimpse(sw_df)
+
+```
+
+## Cleaning Data
+
+::: r-fit-text
+|                                                                                            |                                                                                                                   |
+|-------------------------|-----------------------------------------------|
+| [filter](https://dplyr.tidyverse.org/reference/filter.html)                                | retains or filters out observations based on variable criteria                                                    |
+| [select](https://dplyr.tidyverse.org/reference/select.html)                                | retains or filters out variables                                                                                  |
+| [arrange](https://dplyr.tidyverse.org/reference/arrange.html)                              | sorts variables                                                                                                   |
+| [mutate](https://dplyr.tidyverse.org/reference/mutate.html)                                | change variable's observations OR create a new variable and observations using observations from another variable |
+| [group_by](https://dplyr.tidyverse.org/reference/group_by.html)                            | group observations                                                                                                |
+| [summarise](https://dplyr.tidyverse.org/reference/summarise.html)                          | get descriptive statistics about a variable                                                                       |
+| [relocate](https://dplyr.tidyverse.org/reference/relocate.html)                            | change the position of variables in the data frame                                                                |
+| [rename](https://dplyr.tidyverse.org/reference/rename.html)                                | change the name of an individual variable                                                                         |
+| [drop_na](https://tidyr.tidyverse.org/reference/drop_na.html)                              | remove ALL missing values from a data frame or variable                                                           |
+| [replace_na](https://tidyr.tidyverse.org/reference/replace_na.html?q=replace_na#ref-usage) | replace missing values with a specified                                                                           |
+:::
+
+## Dplyr function: filter
+
+allows you to *select rows* in your data frame that meet specific conditions or criteria in a variable
+
+<br />
+
+```{r}
+#| label: filter function
+#| eval: false
+#| echo: true
+
+sw_df
+
+# let's filter the data frame so we are seeing characters who have blue eyes
+
+sw_eye <- sw_df |> 
+  filter(eye_color == "blue")
+
+sw_eye
+
+```
+
+::: r-fit-text
+## Boolean operators
+
+boolean operators allow you to build criteria in your code
+
+|     |                       |
+|-----|-----------------------|
+| &   | AND                   |
+| \|  | OR                    |
+| ==  | EQUAL                 |
+| !=  | NOT EQUAL             |
+| \<  | LESS THAN             |
+| \>  | GREATER THAN          |
+| \<= | LESS THAN OR EQUAL    |
+| \>= | GREATER THAN OR EQUAL |
+:::
+
+## Filter with Boolean
+
+let's filter the data frame for characters who have blue eyes and were born after 50 BBY
+
+<br />
+
+```{r}
+#| label: filter with more than one criteria
+#| eval: false
+#| echo: true
+
+sw_eye50 <- sw_df |> 
+  filter(eye_color == "blue" & birth_year < 50)
+
+sw_eye50
+
+```
+
+## Dplyr function: select
+
+allows you to *keep* or *discard* variables
+
+<br />
+
+```{r}
+#| label: select function
+#| eval: false
+#| echo: true
+
+# keep variables
+
+sw_select <- sw_df |> 
+  select(name, height, mass)
+
+sw_select
+
+# remove variables
+
+sw_not_select <- sw_df |> 
+  select(-height, -mass)
+
+sw_not_select
+
+```
+
+## Dplyr function: mutate
+
+*creates* new variables in your data or *change* existing variables by performing calculations or transformations.
+
+<br />
+
+```{r}
+#| label: mutate function
+#| eval: false
+#| echo: true
+
+sw_df
+
+sw_df <- sw_df |> 
+  mutate(bmi = height/mass) |>  # run mutate operation
+  relocate(bmi, .after = mass) # relocate variable in data frame
+
+sw_df
+
+```
+
+## Dplyr function: mutate
+
+NOTE: if you name your variable as an *existing variable*, it will *overwrite* the existing variable. If you give it a *new name*, it will create a *new variable*
+
+<br />
+
+```{r}
+#| label: mutate overwrite
+#| eval: false
+#| echo: true
+
+# let's overwrite the old variable
+
+sw_overwrite <- sw_df |> 
+  mutate(height = height/12) # overwrite variable
+
+sw_overwrite 
+
+```
+
+## Dplyr function: arrange
+
+allows you to *sort* variables
+
+<br />
+
+```{r}
+#| label: arrange function
+#| eval: false
+#| echo: true
+
+# oldest characters
+
+sw_df |> 
+  arrange(desc(birth_year))
+
+# characters with the same skin color than the same hair color
+
+sw_df |> 
+  arrange(desc(skin_color), hair_color)
+
+```
+
+## Dplyr function: group_by & summarise
+
+the **group_by** function allows you to group common observations in a variable
+
+<br />
+
+**summarise** function allows you to get descriptive statistics about the groupings
+
+<br />
+
+```{r}
+#| label: group_by and summarise
+#| eval: false
+#| echo: true
+
+sw_group <- sw_df |> 
+  group_by(sex) |>
+  summarise(avg_height = mean(height)) # get mean
+
+sw_group
+
+write_csv(sw_group, "sw_sex_dv.csv") # export
+
+
+```
+
+## Recode Data Values
+
+The **as.** function along with **mutate** will allow you to change the data type of a variable. For this example we are going to recode the *character_id* variable to interpret the data type as a *character* instead of a *double*
+
+<br />
+
+```{r}
+#| label: data type recode
+#| eval: false
+#| echo: true
+
+sw_df <- sw_df |> 
+  mutate(character_id = as.character(character_id))
+
+sw_df
+
+```
+
+## Dyplr Function: recode observations
+
+we can rename the values of observations within a variable using the **mutate** function in combination with the **recode** or **recode_factor** functions
+
+<br />
+
+```{r}
+#| label: recode observations
+#| eval: false
+#| echo: true
+
+
+# let's create a new variable with to give numeric levels instead of value labels
+
+sw_df <- sw_df |> 
+  mutate(gender_num = recode(gender,
+                                    "masculine" = 0,
+                                    "feminine" = 1)) |>
+  relocate(gender_num, .after = gender)
+
+
+view(sw_df)
+
+```
+
+## Dplyr function: rename
+
+allows you rename variables in your data frame
+
+<br />
+
+```{r}
+#| label: rename
+#| eval: false
+#| echo: true
+
+glimpse(sw_df)
+
+sw_df <- sw_df |> 
+  rename("gender_label" = gender)
+
+glimpse(sw_df)
+
+
+```
+
+## Missing Data
+
+missing data in numeric fields can cause an issue when trying to calculate descriptive statistics
+
+<br />
+
+```{r}
+#| label: missing data
+#| eval: false
+#| echo: true
+
+# are there missing NA values
+
+which(is.na(sw_df$bmi))
+
+# with missing values we cannot calculate descriptive statistics
+
+mean(sw_df$bmi)
+
+```
+
+## Tidyr function: drop_na
+
+removes **all** missing data from data frames or variables
+
+```{r}
+#| label: drop_na
+#| eval: false
+#| echo: true
+
+sw_dropNA <- sw_df |> 
+  drop_na()
+
+mean(sw_dropNA$bmi)
+
+
+```
+
+<br />
+
+we can also just drop NAs from a **variable**
+
+```{r}
+#| label: drop na var
+#| eval: false
+#| echo: true
+
+sw_dropNA_var <- sw_df |> 
+  drop_na(bmi)
+
+mean(sw_dropNA_var$bmi)
+```
+
+## Tidyr function: replace_na
+
+you can also recode the NA values for observations with *mutate* and *replace_na*
+
+<br />
+
+```{r}
+#| label: replace_na
+#| eval: false
+#| echo: true
+
+# let's replace the NAs the gender_label variable with "unknown"
+
+
+sw_df <- sw_df |> 
+  mutate(gender_label = replace_na(gender_label, "unknown")) |> 
+  mutate(gender_label = as_factor(gender_label))
+
+levels(sw_df$gender_label)
+
+```
+
+## Readr function: write_csv
+
+the **write_csv** function allows us to export data frames to a csv file once we are done cleaning it up or when we have done some analysis that we want to export
+
+<br />
+
+```{r}
+#| label: exporting data
+#| eval: false
+#| echo: true
+
+# now that we have this date frame cleaned let's save it
+
+# let's export the file
+
+write_csv(sw_df, "starwars_clean.csv")
+
+```
+
+
+## Psych Package
+
+[Psych Package](https://cran.r-project.org/web/packages/psych/index.html) - built-in functions for factor analysis, reliability analysis, descriptive statistics and data visualization.
+
+<br />
+
+```{r}
+#| label: Psych Package
+#| eval: false
+#| echo: true
+
+install.packages("psych")
+library(psych)
+
+```
+
+<br />
+
+```{r}
+#| label: describe function
+#| eval: false
+#| echo: true
+
+sw_ds <- describe(sw_df)
+
+write_csv(sw_ds, "starwars_ds.csv")
+
+```
+
+## Summarytools Package
+
+[SummaryTools Package](https://cran.r-project.org/web/packages/summarytools/index.html) - simplifies data exploration and descriptive statistics generation for data frames and vectors.
+
+<br />
+
+```{r}
+#| label: SummaryTools Package
+#| eval: false
+#| echo: true
+
+install.packages("summarytools")
+library(summarytools)
+
+```
+
+<br />
+
+```{r}
+#| label: summarytools functions
+#| eval: false
+#| echo: true
+
+descr(sw_df)
+
+freq(sw_df$sex)
+
+ctable(sw_df$sex, sw_df$gender)
+
+```
+
+## DataExplorer
+
+[DataExplorer package](http://boxuancui.github.io/DataExplorer/) - automates and streamlines the process of exploring and visualizing datasets.
+
+<br />
+
+```{r}
+#| label: DataExplorer
+#| eval: false
+#| echo: true
+
+install.packages("DataExplorer")
+library(DataExplorer)
+```
+
+<br />
+
+```{r}
+#| label: create report
+#| eval: false
+#| echo: true 
+
+create_report(sw_df)
+
+```

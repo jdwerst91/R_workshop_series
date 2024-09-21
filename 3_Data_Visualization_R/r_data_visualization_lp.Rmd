@@ -1,0 +1,593 @@
+---
+title: "Data Visualization"
+author: "Matt Steele"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: cosmo
+---
+
+
+```{r}
+#| label: working directory
+#| include: false
+#| eval: false
+
+setwd("<path_path_to_file_folder>")
+
+
+```
+
+<br />
+
+```{r}
+#| label: load tidyverse
+#| eval: false
+#| include: false
+
+install.packages("tidyverse")
+library(tidyverse)
+
+
+```
+
+<br />
+
+------------------------------------------------------------------------
+
+# GGPLOT2
+
+visualize your data with ggplot
+
+-   [ggplot package]("https://ggplot2.tidyverse.org/")
+
+<br />
+
+## Grammar of Graphics
+
+the grammar of graphics is implemented through a layered approach to building plots. 
+
+### Required
+
+1. Data: The raw data that you want to visualize.
+2. Aesthetic Mapping (aes()): Defines how variables in the data map to visual properties like position, color, size, shape, etc.
+3. Geometric Objects (geom_*): Represent the actual geometric shapes on the plot (e.g., points, lines, bars).
+
+### Optional
+
+4. Coordinate System (coord_*):Defines the coordinate system for the plot (e.g., Cartesian, polar).
+5. Faceting (facet_*): Divides the plot into subplots based on one or more categorical variables.
+6. Themes (theme_*): Customize the appearance of the plot, including titles, labels, and overall aesthetics.
+
+<br />
+
+------------------------------------------------------------------------
+
+# Line graph
+
+lets create a line graph that tracks approval ratings for the Supreme Court of the United States over time.
+
+<br />
+
+## Data
+
+```{r}
+#| label: load data
+#| eval: false
+
+# load scotus approval data
+
+scotus <- read_csv("scotus_approval.csv")
+
+# let's just view the pollster YouGov using the filter function
+
+scotus_yg <- scotus |> 
+  filter(pollster == "YouGov")
+
+scotus_yg
+
+
+```
+
+<br />
+
+---
+
+## Aesthetic Mapping (aes())
+
+next we are going to set the variables that will use by using the [ggplot function](https://ggplot2.tidyverse.org/reference/ggplot.html) along with the [aes function](https://ggplot2.tidyverse.org/reference/aes.html)
+
+
+```{r}
+#| label: aes
+#| eval: false
+
+# set the parameters and coordinates
+
+scotus.line <- ggplot(scotus_yg, aes(date, per_yes))
+
+# calling that object will give us an empty plot
+
+
+scotus.line
+
+```
+
+
+------------------------------------------------------------------------
+
+## Geometric Objects (geom_*)
+
+choose the plot that we want to use for our visualization using the [geom_* element](https://ggplot2.tidyverse.org/reference/index.html#geoms)
+
+- [Geom Cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf)
+
+```         
+We combine elements in ggplot using the (+) operator 
+```
+
+```{r}
+#| label: geom_line
+#| eval: false
+
+scotus.line + 
+  geom_line()
+  
+
+```
+
+<br />
+
+------------------------------------------------------------------------
+
+## Theme: Color, Geom Size, Transparancy
+
+|                           |                     |
+|---------------------------|---------------------|
+| **fill =** or **color =** | change colors       |
+| **size =**                | change size         |
+| **alpha =**               | change transparency |
+
+<br />
+
+```{r}
+#| label: color, shape, transparency
+#| eval: false
+
+# add color
+
+scotus.line + 
+  geom_line(color = "coral")
+
+# change the size
+
+scotus.line + 
+  geom_line(color = "coral", size = 2)
+
+
+```
+
+<br />
+
+---
+
+
+## Theme: Labels
+
+the [labs element](https://ggplot2.tidyverse.org/reference/labs.html?q=labs) will allow you to add or change labels in the plot
+
+```{r}
+#| label: labs
+#| eval: false
+
+scotus.line + 
+  geom_line(color = "coral", size = 2) +
+  labs(
+    title = "SCOTUS Approval",
+    subtitle = "2023",
+    caption = "polls from YouGov",
+    y = "Approval",
+    x = NULL
+  )
+
+
+```
+
+<br />
+
+---
+
+## Themes: Built-in
+
+ggplot has [built-in themes](https://ggplot2.tidyverse.org/reference/index.html#themes) with pre-set settings for you 
+
+
+```{r}
+#| label: built-in theme
+#| eval: false
+
+scotus.line + 
+  geom_line(color = "coral", size = 2) +
+  labs(
+    title = "SCOTUS Approval",
+    subtitle = "2023",
+    caption = "polls from YouGov",
+    y = "Approval",
+    x = NULL
+  ) +
+  theme_minimal()
+
+```
+
+
+<br />
+
+---
+
+## Themes: Customize
+
+the [theme element](https://ggplot2.tidyverse.org/reference/theme.html) will allow you to customize the appearance of axes, legends, and labels
+
+```{r}
+#| label: customize theme
+#| eval: false
+
+scotus.line + 
+  geom_line(color = "coral", size = 2) +
+  labs(
+    title = "SCOTUS Approval",
+    subtitle = "2023",
+    caption = "polls from YouGov",
+    y = "Approval",
+    x = NULL
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 20, color = "navy"))
+
+```
+
+
+<br />
+
+---
+
+## Theme: Scales
+
+the [scales element](https://ggplot2.tidyverse.org/reference/index.html#scales) allows you to fine-tune and adjust the mapping/scale of labels, breaks, and legends
+
+- the **scale_x_date** element allows you to adjust your date elements on the x axis
+
+- [Date Formats - strptime](https://rdrr.io/r/base/strptime.html)
+
+```{r}
+#| label: scales
+#| eval: false
+
+scotus.line + 
+  geom_line(color = "coral", size = 2) +
+  labs(
+    title = "SCOTUS Approval",
+    subtitle = "2023",
+    caption = "polls from YouGov",
+    y = "Approval",
+    x = NULL
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 20, color = "navy")) +
+  scale_x_date( date_breaks = "6 weeks",
+                date_labels = "%b %d")
+  
+```
+
+<br />
+
+---
+
+## Smoothed Lines
+
+You can reduce overplotting using **loess** or **linear regression lines** with the [geom_smooth or stat_smooth element](https://ggplot2.tidyverse.org/reference/geom_smooth.html)
+
+```{r}
+#| label: geom_smooth
+#| eval: false
+
+scotus.line + 
+  geom_smooth(color = "coral", size = 2) +
+  labs(
+    title = "SCOTUS Approval",
+    subtitle = "2023",
+    caption = "polls from YouGov",
+    y = "Approval",
+    x = NULL
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 20, color = "coral")) +
+  scale_x_date( date_breaks = "6 weeks",
+                date_labels = "%b %d")
+
+```
+
+
+
+<br />
+
+---
+
+
+
+## Export your plot
+
+The [ggsave function](https://ggplot2.tidyverse.org/reference/ggsave.html) will export the most recent plot called in a fille type specified by the user
+
+
+```{r}
+#| label: export
+#| eval: false
+
+ggsave("scotus_approval.png", plot = my_plot, width = 6, height = 4, dpi = 300)
+
+
+```
+
+Additionally you can use the export options in RStudio's Plot tab in the Misc Pane
+
+<br />
+
+---
+
+
+## Histogram Graph
+
+the [histogram geom](https://ggplot2.tidyverse.org/reference/geom_histogram.html) allows you to see the distribution of a continuous (dbl or num) variable
+
+```{r}
+#| label: histogram
+#| eval: false
+
+
+# load demographics data frame
+
+demo <- read_csv("demographics.csv")
+
+
+# let's look at the distribution of the age variable by creating a histogram
+
+demo.hist <- ggplot(demo, aes(age))
+
+demo.hist +
+  geom_histogram()
+
+
+```
+
+<br />
+
+---
+
+## Binning
+
+the binning argument allows you to group continuous data into discrete intervals or bins
+
+```{r}
+#| label: bin
+#| eval: false
+
+# number of bins to use
+
+demo.hist +
+  geom_histogram(bins = 10)
+
+# length of a bins
+
+demo.hist +
+  geom_histogram(binwidth = 15)
+
+```
+
+<br />
+
+---
+
+## Theme: Color, Geom Size, Transparancy
+
+|                           |                     |
+|---------------------------|---------------------|
+| **fill =** or **color =** | change colors       |
+| **size =**                | change size         |
+| **alpha =**               | change transparency |
+
+
+
+```{r}
+#| label: theme options
+#| eval: false
+
+
+
+demo.hist +
+  geom_histogram(bins = 25, color = "coral", fill = "skyblue", alpha = .5) +
+  theme_light()
+
+```
+
+<br />
+
+---
+
+## Order of Elements
+
+The order that the elements appear on the plot is dictated by its position in your code. 
+
+- The first elements in the code appear at the bottom of the plot and the last elements appear on the top of you plot
+
+<br />
+
+---
+
+
+## Mutliple Geoms
+
+We can add multiple geoms into a plot by adding theme as their own element
+
+the [geom_vline/geom_hline element](https://ggplot2.tidyverse.org/reference/geom_abline.html) allows you to add a reference line to your plot
+
+
+```{r}
+#| label: vline
+#| eval: false
+
+# add a reference line
+
+demo.hist +
+  geom_vline(xintercept = 40, color = "navy", size = 3) +
+  geom_histogram(bins = 25, color = "coral", fill = "skyblue", alpha = .5) +
+  theme_light()
+
+```
+
+
+<br />
+
+---
+
+## Faceting
+
+the [facet_grid](https://ggplot2.tidyverse.org/reference/facet_grid.html) or [facet_wrap](https://ggplot2.tidyverse.org/reference/facet_wrap.html) element will allow you to break your plot out by categorical variables
+
+```{r}
+#| label: facets
+#| eval: false
+
+demo.hist +
+  geom_vline(xintercept = 40, color = "navy", size = 3) +
+  geom_histogram(bins = 25, color = "coral", fill = "skyblue", alpha = .5) +
+  theme_light() + 
+  facet_wrap(facets = vars(inccat), nrow = 3)
+
+```
+
+<br />
+
+------------------------------------------------------------------------
+
+# Bar Graph
+
+the [geom_bar element](https://ggplot2.tidyverse.org/reference/geom_bar.html?q=geom_bar) allows you create a bar chart uses the number of cases of each group in a categorical variable
+
+```{r}
+#| label: geom_bar
+#| eval: false
+
+
+demo.bar <- ggplot(demo, aes(carcat))
+
+demo.bar +
+  geom_bar()
+
+
+```
+
+
+<br />
+
+
+the [geom_col element](https://ggplot2.tidyverse.org/reference/geom_bar.html?q=geom_bar) allows you to create a bar chart using a categorical and continuous variable
+
+
+```{r}
+#| label: geom_col
+#| eval: false
+
+demo.col <- ggplot(demo, aes(carcat, income))
+
+demo.col +
+  geom_col()
+
+```
+
+<br />
+
+---
+
+## Reorder Plot
+
+you can order the bar graph using the [fct_reorder function](https://forcats.tidyverse.org/reference/fct_reorder.html) from Forcats
+
+```{r}
+#| label: fct_reorder
+#| eval: false
+
+
+demo.col <- ggplot(demo, aes(fct_reorder(carcat, income), income))
+
+demo.col +
+  geom_col()
+
+```
+
+<br />
+
+---
+
+## Add Additional Variable
+
+you can use the fill argument in aes to map an additional variable onto individual bars
+
+```{r}
+#| label: aes fill
+#| eval: false
+
+demo.col +
+  geom_col(aes(fill = ed))
+  
+
+```
+
+<br />
+
+---
+
+## Add Color Palletes
+
+The scale_fill_brewer function will allow you to add pre-built palettes to your plot
+
+-   [Color Brewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)
+
+
+```{r}
+#| label: color brewer
+#| eval: false
+
+demo.col +
+  geom_col(aes(fill = ed)) +
+  scale_fill_brewer(palette = "Pastel1")
+
+  
+
+```
+
+<br />
+
+---
+
+
+## Scales
+
+the [scales element](https://ggplot2.tidyverse.org/reference/index.html#scales) allows you to fine-tune and adjust the mapping/scale of labels, breaks, and legends
+
+- the **scale_y_continuous** or **scale_x_continuous** along with [label_number](https://scales.r-lib.org/reference/label_number.html) elements allows you to adjust a numeric axis
+
+```{r}
+#| label: scale continous
+#| eval: false
+
+demo.col +
+  geom_col(aes(fill = ed)) +
+  scale_fill_brewer(palette = "Pastel1") +
+  scale_y_continuous(labels = scales::label_number_si())
+  
+
+```
+
+
+

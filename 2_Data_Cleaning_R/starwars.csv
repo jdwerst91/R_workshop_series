@@ -1,0 +1,88 @@
+name,character_id,height,mass,hair_color,skin_color,eye_color,birth_year,sex,gender,homeworld,species
+Luke Skywalker,31543,172,77,blond,fair,blue,19,male,masculine,Tatooine,Human
+C-3PO,34621,167,75,NA,gold,yellow,112,none,masculine,Tatooine,Droid
+R2-D2,38280,96,32,NA,white,red,33,none,masculine,Naboo,Droid
+Darth Vader,16914,202,136,none,white,yellow,41.9,male,masculine,Tatooine,Human
+Leia Organa,32723,150,49,brown,light,brown,19,female,feminine,Alderaan,Human
+Owen Lars,17029,178,120,brown,light,blue,52,male,masculine,Tatooine,Human
+Beru Whitesun lars,32889,165,75,brown,light,blue,47,female,feminine,Tatooine,Human
+R5-D4,34684,97,32,NA,white,red,NA,none,masculine,Tatooine,Droid
+Biggs Darklighter,48171,183,84,black,light,brown,24,male,masculine,Tatooine,Human
+Obi-Wan Kenobi,32136,182,77,auburn,fair,blue-gray,57,male,masculine,Stewjon,Human
+Anakin Skywalker,33979,188,84,blond,fair,blue,41.9,male,masculine,Tatooine,Human
+Wilhuff Tarkin,40831,180,NA,auburn,fair,blue,64,male,masculine,Eriadu,Human
+Chewbacca,46714,228,112,brown,unknown,blue,200,male,masculine,Kashyyyk,Wookiee
+Han Solo,19191,180,80,brown,fair,brown,29,male,masculine,Corellia,Human
+Greedo,38336,173,74,NA,green,black,44,male,masculine,Rodia,Rodian
+Jabba Desilijic Tiure,37601,175,1358,NA,green-tan,orange,600,hermaphroditic,masculine,Nal Hutta,Hutt
+Wedge Antilles,38649,170,77,brown,fair,hazel,21,male,masculine,Corellia,Human
+Jek Tono Porkins,45617,180,110,brown,fair,blue,NA,male,masculine,Bestine IV,Human
+Yoda,48746,66,17,white,green,brown,896,male,masculine,NA,Yoda's species
+Palpatine,30757,170,75,grey,pale,yellow,82,male,masculine,Naboo,Human
+Boba Fett,20813,183,78.2,black,fair,brown,31.5,male,masculine,Kamino,Human
+IG-88,26840,200,140,none,metal,red,15,none,masculine,NA,Droid
+Bossk,38965,190,113,none,green,red,53,male,masculine,Trandosha,Trandoshan
+Lando Calrissian,31939,177,79,black,dark,brown,31,male,masculine,Socorro,Human
+Lobot,17813,175,79,none,light,blue,37,male,masculine,Bespin,Human
+Ackbar,29893,180,83,none,brown mottle,orange,41,male,masculine,Mon Cala,Mon Calamari
+Mon Mothma,46247,150,NA,auburn,fair,blue,48,female,feminine,Chandrila,Human
+Arvel Crynyd,29304,165,NA,brown,fair,brown,NA,male,masculine,NA,Human
+Wicket Systri Warrick,27839,88,20,brown,brown,brown,8,male,masculine,Endor,Ewok
+Nien Nunb,47508,160,68,none,grey,black,NA,male,masculine,Sullust,Sullustan
+Qui-Gon Jinn,13858,193,89,brown,fair,blue,92,male,masculine,NA,Human
+Nute Gunray,46108,191,90,none,mottled green,red,NA,male,masculine,Cato Neimoidia,Neimodian
+Finis Valorum,49295,170,65,blond,fair,blue,91,male,masculine,Coruscant,Human
+Jar Jar Binks,37522,196,66,none,orange,orange,52,male,masculine,Naboo,Gungan
+Roos Tarpals,46842,224,82,none,grey,orange,NA,male,masculine,Naboo,Gungan
+Rugor Nass,15874,206,80,none,green,orange,NA,male,masculine,Naboo,Gungan
+Ric Olié,39967,183,60,brown,fair,blue,NA,unkown,NA,Naboo,NA
+Watto,29001,137,50,black,blue,yellow,NA,male,masculine,Toydaria,Toydarian
+Sebulba,11126,112,40,none,grey,orange,NA,male,masculine,Malastare,Dug
+Quarsh Panaka,20722,183,74,black,dark,brown,62,unkown,NA,Naboo,NA
+Shmi Skywalker,40836,163,65,black,fair,brown,72,female,feminine,Tatooine,Human
+Darth Maul,15581,175,80,none,red,yellow,54,male,masculine,Dathomir,Zabrak
+Bib Fortuna,45995,180,73,none,pale,pink,NA,male,masculine,Ryloth,Twi'lek
+Ayla Secura,30422,178,55,none,blue,hazel,48,female,feminine,Ryloth,Twi'lek
+Dud Bolt,33496,94,45,none,blue,yellow,NA,male,masculine,Vulpter,Vulptereen
+Gasgano,18696,122,57,none,white,black,NA,male,masculine,Troiken,Xexto
+Ben Quadinaros,15515,163,65,none,grey,orange,NA,male,masculine,Tund,Toong
+Mace Windu,42163,188,84,none,dark,brown,72,male,masculine,Haruun Kal,Human
+Ki-Adi-Mundi,43203,198,82,white,pale,yellow,92,male,masculine,Cerea,Cerean
+Kit Fisto,11504,196,87,none,green,black,NA,male,masculine,Glee Anselm,Nautolan
+Eeth Koth,42818,171,60,black,brown,brown,NA,male,masculine,Iridonia,Zabrak
+Adi Gallia,48586,184,50,none,dark,blue,NA,female,feminine,Coruscant,Tholothian
+Saesee Tiin,23527,188,79,none,pale,orange,NA,male,masculine,Iktotch,Iktotchi
+Yarael Poof,14662,264,102,none,white,yellow,NA,male,masculine,Quermia,Quermian
+Plo Koon,37002,188,80,none,orange,black,22,male,masculine,Dorin,Kel Dor
+Mas Amedda,48127,196,NA,none,blue,blue,NA,male,masculine,Champala,Chagrian
+Gregar Typho,26826,185,85,black,dark,brown,NA,male,masculine,Naboo,Human
+Cordé,28846,157,59,brown,light,brown,NA,female,feminine,Naboo,Human
+Cliegg Lars,28904,183,79,brown,fair,blue,82,male,masculine,Tatooine,Human
+Poggle the Lesser,36761,183,80,none,green,yellow,NA,male,masculine,Geonosis,Geonosian
+Luminara Unduli,25280,170,56.2,black,yellow,blue,58,female,feminine,Mirial,Mirialan
+Barriss Offee,37584,166,50,black,yellow,blue,40,female,feminine,Mirial,Mirialan
+Dormé,37551,165,50,brown,light,brown,NA,female,feminine,Naboo,Human
+Dooku,22740,193,80,white,fair,brown,102,male,masculine,Serenno,Human
+Bail Prestor Organa,34825,191,NA,black,tan,brown,67,male,masculine,Alderaan,Human
+Jango Fett,28168,183,79,black,tan,brown,66,male,masculine,Concord Dawn,Human
+Zam Wesell,36244,168,55,blonde,fair,yellow,NA,female,feminine,Zolan,Clawdite
+Dexter Jettster,34821,198,102,none,brown,yellow,NA,male,masculine,Ojom,Besalisk
+Lama Su,33141,229,88,none,grey,black,NA,male,masculine,Kamino,Kaminoan
+Taun We,44990,213,90,none,grey,black,NA,female,feminine,Kamino,Kaminoan
+Jocasta Nu,12755,167,65,white,fair,blue,NA,female,feminine,Coruscant,Human
+Ratts Tyerell,10630,79,15,none,grey,unknown,NA,male,masculine,Aleen Minor,Aleena
+R4-P17,43604,96,NA,none,silver,"red, blue",NA,none,feminine,NA,Droid
+Wat Tambor,21018,193,48,none,green,unknown,NA,male,masculine,Skako,Skakoan
+San Hill,41237,191,57,none,grey,gold,NA,male,masculine,Muunilinst,Muun
+Shaak Ti,10995,178,57,none,red,black,NA,female,feminine,Shili,Togruta
+Grievous,35569,216,159,none,brown,"green, yellow",NA,male,masculine,Kalee,Kaleesh
+Tarfful,29606,234,136,brown,brown,blue,NA,male,masculine,Kashyyyk,Wookiee
+Raymus Antilles,12154,188,79,brown,light,brown,NA,male,masculine,Alderaan,Human
+Sly Moore,41131,178,48,none,pale,white,NA,unkown,NA,Umbara,NA
+Tion Medon,20514,206,80,none,grey,black,NA,male,masculine,Utapau,Pau'an
+Finn,11621,184,65,black,dark,dark,NA,male,masculine,NA,Human
+Rey,49618,164,50,brown,light,hazel,NA,female,feminine,Jakku,Human
+Poe Dameron,21382,190,70,brown,light,brown,NA,male,masculine,Yavin 4,Human
+BB8,44128,35,NA,none,none,black,NA,none,masculine,NA,Droid
+Captain Phasma,38297,225,155,unknown,unknown,unknown,NA,unkown,NA,Parnassos,NA
+Padmé Amidala,35974,165,45,brown,light,brown,46,female,feminine,Naboo,Human
