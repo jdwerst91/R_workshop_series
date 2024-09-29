@@ -2,6 +2,9 @@
 *.R linguist-language=R
 *.rmd linguist-language=RMarkdown
 
+# Treat CSS files as plain text
+*.css linguist-language=Text
+
 # Treat HTML files as plain text
 *.html linguist-language=Text
 
@@ -11,3 +14,7 @@ docs/* linguist-vendored
 # Exclude JavaScript files
 *.js linguist-vendored
 *.json linguist-vendored
+
+# Ensure the repository is recognized as primarily R
+*.R linguist-detectable=true
+*.rmd linguist-detectable=true
