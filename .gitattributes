@@ -1,32 +1,6 @@
-# Set R and RMarkdown as recognized languages in all directories and subdirectories
+# Set R and RMarkdown as recognized languages
 *.R linguist-language=R
-**/*.R linguist-language=R
-
 *.rmd linguist-language=RMarkdown
-**/*.rmd linguist-language=RMarkdown
 
-# Ignore HTML and treat it as plain text
-*.html linguist-language=Text
-**/*.html linguist-language=Text
-
-# Also ignore other possible HTML-like content (optional)
-*.xml linguist-language=Text
-**/*.xml linguist-language=Text
-
-# Treat CSS and TeX files as plain text
-*.css linguist-language=Text
-**/*.css linguist-language=Text
-
-*.tex linguist-language=Text
-**/*.tex linguist-language=Text
-
-# Ignore specific directories or files (optional)
-docs/* linguist-vendored
-
-# Exclude JavaScript files
-*.js linguist-vendored
-*.json linguist-vendored
-
-# Force detection of R/RMarkdown files for language classification
-*.R linguist-detectable=true
-*.rmd linguist-detectable=true
+# Treat everything else as plain text
+* linguist-language=Text
