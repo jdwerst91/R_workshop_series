@@ -1,2 +1,10 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Set R and RMarkdown as recognized languages
+*.R linguist-language=R
+*.rmd linguist-language=RMarkdown
+
+# Treat HTML files as plain text
+*.html linguist-language=Text
+
+# Ignore specific directories or files (optional)
+docs/* linguist-vendored
+
