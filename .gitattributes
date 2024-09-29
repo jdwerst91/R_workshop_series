@@ -5,20 +5,14 @@
 *.rmd linguist-language=RMarkdown
 **/*.rmd linguist-language=RMarkdown
 
+# Ignore HTML and treat it as plain text
+*.html linguist-language=Text
+**/*.html linguist-language=Text
+
+# Also ignore other possible HTML-like content (optional)
+*.xml linguist-language=Text
+**/*.xml linguist-language=Text
+
 # Treat CSS and TeX files as plain text
 *.css linguist-language=Text
-**/*.css linguist-language=Text
-
-*.tex linguist-language=Text
-**/*.tex linguist-language=Text
-
-# Ignore specific directories or files (optional)
-docs/* linguist-vendored
-
-# Exclude JavaScript files
-*.js linguist-vendored
-*.json linguist-vendored
-
-# Ensure the repository is recognized as primarily R/RMarkdown
-*.R linguist-detectable=true
-*.rmd linguist-detectable=true
+**/*.css linguist-language=
