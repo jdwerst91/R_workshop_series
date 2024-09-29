@@ -8,3 +8,6 @@
 # Ignore specific directories or files (optional)
 docs/* linguist-vendored
 
+# Exclude JavaScript files
+*.js linguist-vendored
+*.json linguist-vendored
