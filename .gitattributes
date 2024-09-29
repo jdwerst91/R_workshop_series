@@ -15,4 +15,18 @@
 
 # Treat CSS and TeX files as plain text
 *.css linguist-language=Text
-**/*.css linguist-language=
+**/*.css linguist-language=Text
+
+*.tex linguist-language=Text
+**/*.tex linguist-language=Text
+
+# Ignore specific directories or files (optional)
+docs/* linguist-vendored
+
+# Exclude JavaScript files
+*.js linguist-vendored
+*.json linguist-vendored
+
+# Force detection of R/RMarkdown files for language classification
+*.R linguist-detectable=true
+*.rmd linguist-detectable=true
