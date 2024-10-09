@@ -10,15 +10,20 @@ execute:
   eval: false
 ---
 
+## Welcome
+
+-   [Matt Steele](https://directory.lib.wvu.edu/employee/210/)
+-   [Data Cleaning and Analysis with R and RStudio](https://wvu.libcal.com/event/13158087)
+-   [Data Visualization and Presentation with R and RStudio](https://wvu.libcal.com/event/13158090)
+-   [WVU Data Services Youtube Channel](https://www.youtube.com/playlist?list=PLVwupjN09QKVMYX_4I_F2cnDzTW-uz4iL)
+
 ## Resources
 
--   [Official Site for R and Comprehensive R Archive Network
-    (CRAN)](https://cran.r-project.org/)
+-   [Official Site for R and Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/)
 
 -   [Official Site for POSIT/RSTUDIO](https://rstudio.com/)
 
--   [O'Reilly Learning
-    Platform](https://databases.lib.wvu.edu/connect/1540334373)
+-   [O'Reilly Learning Platform](https://databases.lib.wvu.edu/connect/1540334373)
 
     -   R for Data Science, 2nd Edition
 
@@ -47,15 +52,13 @@ execute:
 ## File Types
 
 ::: r-fit-text
-**R Script**: create code based text file that allows you to save and
-execute code at your discretion
+**R Script**: create code based text file that allows you to save and execute code at your discretion
 
 > *File \> New File \> R Script*
 
 <br />
 
-**R Markdown** or **Quarto Document**: allows you to combine narrative
-text, code, and the output of code in a single document.
+**R Markdown** or **Quarto Document**: allows you to combine narrative text, code, and the output of code in a single document.
 
 > *File \> New File \> R Markdown*
 
@@ -64,9 +67,7 @@ text, code, and the output of code in a single document.
 
 ## RStudio
 
-RStudio is an Integrated Development Environment (IDE) that allows you
-to save you code, store your variables and environments and view
-outputs.
+RStudio is an Integrated Development Environment (IDE) that allows you to save you code, store your variables and environments and view outputs.
 
 ## Source Pane
 
@@ -84,8 +85,7 @@ this pane is opened when you create or open a markdown or script file.
 
 ## Console Pane
 
-This is where you interact with the R. The results of your commands are
-displayed in this pane.
+This is where you interact with the R. The results of your commands are displayed in this pane.
 
 -   Useful for testing code and exploring data
 
@@ -122,8 +122,7 @@ Some suggested Preferences to set:
 
 ## Working Directory
 
-the folder that you are working in, where you store your files, and
-where you load your files.
+the folder that you are working in, where you store your files, and where you load your files.
 
 > *Session \> Set Working Directory \> Choose Directory*
 
@@ -192,17 +191,14 @@ str(400)
 ```
 
 ::: notes
-ready-made tools or functions that you can use in the R programming
-language. Imagine you have a toolbox, and in that toolbox, you have
-different tools for various tasks like measuring, cutting, or fixing
-things.
+ready-made tools or functions that you can use in the R programming language. Imagine you have a toolbox, and in that toolbox, you have different tools for various tasks like measuring, cutting, or fixing things.
 :::
 
 ## Arguments
 
 used to provide the details about how your function operates
 
-<img src="pizza.png" alt="pizza" width="55%"/>
+<img src="hammer.jpg" alt="hammer" width="55%"/>
 
 <br>
 
@@ -218,28 +214,19 @@ sample(1:5000, 50, TRUE)
 ```
 
 ::: notes
-arguments in R as the ingredients or details you provide to a function,
-like telling a chef how to prepare your food. These arguments help
-customize what the function does, and the function's output is like the
-dish you receive based on your requests.
+arguments in R as the ingredients or details you provide to a function, like telling a chef how to prepare your food. These arguments help customize what the function does, and the function's output is like the dish you receive based on your requests.
 :::
 
 ## Documentation
 
-provides the necessary information, explanations, examples, and guidance
-to help you learn, understand, and effectively use R functions and
-packages.
+provides the necessary information, explanations, examples, and guidance to help you learn, understand, and effectively use R functions and packages.
 
 <br>
 
--   [Base R Function
-    Documentation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html)
--   [Dplyr
-    Documentation](https://dplyr.tidyverse.org/reference/index.html)
--   Get help with a package, function, or argument within R. Using
-    **(?)** or **help("**name of function")
--   The **TAB** button will also provide help with suggestions and
-    auto-filling options
+-   [Base R Function Documentation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html)
+-   [Dplyr Documentation](https://dplyr.tidyverse.org/reference/index.html)
+-   Get help with a package, function, or argument within R. Using **(?)** or **help("**name of function")
+-   The **TAB** button will also provide help with suggestions and auto-filling options
 
 ## Objects
 
@@ -248,10 +235,7 @@ used to store and work on data (numbers, words, tables, and more).
 <img src="drawer.png" alt="drawer" width="55%"/>
 
 ::: notes
-"object" is a fundamental concept that can be thought of as a container
-or a holder for data. Just like in everyday life, you use different
-containers like bags, boxes, or drawers to store and organize your
-things
+"object" is a fundamental concept that can be thought of as a container or a holder for data. Just like in everyday life, you use different containers like bags, boxes, or drawers to store and organize your things
 :::
 
 ## Assignment Operator (\<-)
@@ -280,12 +264,10 @@ a + b
 
 ## Naming Objects
 
--   Use descriptive and meaningful names that indicate the purpose of
-    the object
+-   Use descriptive and meaningful names that indicate the purpose of the object
 -   Use lowercase letters.
 -   Use underscores to separate words (e.g., my_variable_name).
--   Avoid using reserved words or functions (e.g., "if," "else," "for,"
-    "function").
+-   Avoid using reserved words or functions (e.g., "if," "else," "for," "function").
 
 ## Data Types
 
@@ -293,7 +275,7 @@ a + b
 <br />
 
 | type                  | values                                                                                                |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | **Double or Numeric** | used for numbers which can be integers (whole numbers) or real numbers (numbers with decimal points). |
 | **Character**         | used for text, words, and strings of characters. Enclose in double ("") or single ('') quotes.        |
 | **Factor**            | used to represent categorical data with predefined levels.                                            |
@@ -303,9 +285,7 @@ a + b
 
 ## Packages
 
-R packages are like toolkits or collections of pre-built functions, data
-sets, and tools that extend the capabilities of the R programming
-language.
+R packages are like toolkits or collections of pre-built functions, data sets, and tools that extend the capabilities of the R programming language.
 
 ## Packages
 
@@ -313,8 +293,7 @@ language.
 
 #### Install
 
-You must install a package before you can load it. *But you only need to
-install it one time.*
+You must install a package before you can load it. *But you only need to install it one time.*
 
 ```{r}
 #| label: install packages
@@ -329,8 +308,7 @@ install.packages("tidyverse")
 
 #### Load
 
-For every new session, you must load the package to use the it's
-functions.
+For every new session, you must load the package to use the it's functions.
 
 ```{r}
 #| label: load package
@@ -363,9 +341,7 @@ vec_two
 
 ## Data Frame
 
-two-dimensional sequence of data variables (columns) and observations
-(rows). While each variable in a data frame typically contains data of
-the same type, different variable can contain different data types.
+two-dimensional sequence of data variables (columns) and observations (rows). While each variable in a data frame typically contains data of the same type, different variable can contain different data types.
 
 <br>
 
@@ -389,8 +365,7 @@ box.office.mil <- c(787, 534, 572)
 
 ## Subsetting Variables
 
-used to select and work with specific variables (columns) from a data
-frame.
+used to select and work with specific variables (columns) from a data frame.
 
 <br>
 
@@ -404,9 +379,7 @@ starWars.data$year
 
 ## Export / Save Data
 
-Once you are done entering your data, you can export it to your working
-directory. The function without built-in arguments is **write.table( )**
-but if are saving it as a csv, you are better using **write.csv( )**.
+Once you are done entering your data, you can export it to your working directory. The function without built-in arguments is **write.table( )** but if are saving it as a csv, you are better using **write.csv( )**.
 
 <br>
 
@@ -420,9 +393,7 @@ write.csv(starWars.data, "starwars.csv")
 
 ## Load Data
 
-load data from a file in your working directory using the **read_csv()**
-function from tidyverse. There is also the **read.csv( )** function in
-base R.
+load data from a file in your working directory using the **read_csv()** function from tidyverse. There is also the **read.csv( )** function in base R.
 
 <br>
 
@@ -483,8 +454,6 @@ max(fight_songs$number_fights) # maximum value of a variable
 ## Conclusion
 
 -   [Matt Steele](https://directory.lib.wvu.edu/employee/210/)
--   [Jeff Werst](https://directory.lib.wvu.edu/employee/259)
--   [Data Cleaning and Analysis with R and
-    RStudio](https://wvu.libcal.com/event/11343694)
--   [Data Visualization and Presentation with R and
-    RStudio](https://wvu.libcal.com/event/11343718)
+-   [Data Cleaning and Analysis with R and RStudio](https://wvu.libcal.com/event/13158087)
+-   [Data Visualization and Presentation with R and RStudio](https://wvu.libcal.com/event/13158090)
+-   [WVU Data Services Youtube Channel](https://www.youtube.com/playlist?list=PLVwupjN09QKVMYX_4I_F2cnDzTW-uz4iL)
