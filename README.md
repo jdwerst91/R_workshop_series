@@ -8,8 +8,8 @@ West Virginia University (WVU) Libraries present a series of hands-on workshops 
 Our goal is to provide participants with a practical foundation in R, enabling them to manage, analyze, and visualize data effectively in their academic or professional projects.
 
 ### Hosts
-- **Matt Steele** - [Research Engagement Librarian](https://directory.lib.wvu.edu/employee/210/)  
-  Matt offers data services and analytics consultation at WVU Libraries.
+- **Yiheng Wu** - [Research Engagement Librarian](https://directory.lib.wvu.edu/employee/331/)  
+  Yiheng offers data services and analytics consultation at WVU Libraries.
   
 - **Jeff Werst** - [Student Success Librarian](https://directory.lib.wvu.edu/employee/259/)  
   Jeff focuses on student success and science-based instructional support at WVU Libraries.
@@ -48,11 +48,11 @@ By the end of the workshop series, participants will be able to:
 Before attending the workshops, participants must install the following software:
 1. [R](https://cran.rstudio.com/) - The R programming language.
 2. [RStudio](https://posit.co/download/rstudio-desktop/) - The integrated development environment for R.
-3. [GitHub Desktop](https://desktop.github.com/) - A graphical interface for managing Git and GitHub repositories.
+Optionally: [GitHub Desktop](https://desktop.github.com/) - A graphical interface for managing Git and GitHub repositories.
 
 ## Course Materials
 All workshop lesson plans, slides, and supplemental materials are available in the `Presentation_files` folder of this repository.
 
 ---
 
-For further assistance or questions, please reach out to Matt Steele or Jeff Werst via the links provided above.
+For further assistance or questions, please reach out to Yiheng Wu or Jeff Werst via the links provided above.
