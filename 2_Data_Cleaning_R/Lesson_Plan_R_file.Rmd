@@ -577,7 +577,7 @@ descr(sw_df)
 
 freq(sw_df$sex)
 
-ctable(sw_df$sex, sw_df$gender)
+ctable(sw_df$sex, sw_df$gender_label)
 
 ```
 
@@ -599,6 +599,6 @@ library(DataExplorer)
 #| label: create report
 #| eval: false
 
-create_report(reviews_df)
+create_report(sw_df)
 
 ```
